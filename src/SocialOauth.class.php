@@ -21,7 +21,6 @@
         protected $header;
 
         public function __construct() {
-            $this->accessToken = null;
             $this->nonce = time() . rand();
         }
 
@@ -71,6 +70,14 @@
 
         public function setCode($code) {
             return $this->code = $code;
+        }
+
+        public function getAccessToken() {
+            return $this->access_token;
+        }
+
+        public function setAccessToken($access_token) {
+            return $this->access_token = $access_token;
         }
 
         public function Authorize() {
@@ -129,11 +136,9 @@
         }
 
         public function getUserProfile() {
-            $access_token_value = $this->requestAccessToken();
-
-            if ($this->user_profile_url){
-                $profile_url = "$this->user_profile_url$access_token_value";
-                return $this->curl_request($profile_url, "GET", $access_token_value);
+            if ($this->user_profile_url && $this->access_token){
+                $profile_url = "$this->user_profile_url" . $this->access_token;
+                return $this->curl_request($profile_url, "GET", $this->access_token);
             } else {
                 return null;
             }
