@@ -94,7 +94,7 @@
 
                 $redirect_url = "$request_url$postvals";
                 
-                $oauth_redirect_value = $this->curl_request($redirect_url, 'GET', '');
+                $oauth_redirect_value = $this->curl_request($redirect_url, 'GET', null);
 
                 $dialog_url = $this->dialog_url . $oauth_redirect_value;             
             }
@@ -103,13 +103,16 @@
         }
 
         public function requestAccessToken(){
-            $postvals = "client_id=" . $this->client_id
-                ."&client_secret=" . $this->client_secret
-                ."&grant_type=authorization_code"
-                ."&redirect_uri=" . urlencode($this->redirect_uri)
-                ."&code=" . $this->code;
-
-            $access_token_value = $this->curl_request($this->access_token_url, 'POST', $postvals);
+            $query_data = array(
+                'client_id' => $this->client_id,
+                'client_secret' => $this->client_secret,
+                'grant_type' => "authorization_code",
+                'redirect_uri' => $this->redirect_uri,
+                'code' => $this->code
+            );
+            $post_values = http_build_query($query_data);
+            
+            $access_token_value = $this->curl_request($this->access_token_url, 'POST', $post_values);
             $decode_access_token = json_decode( stripslashes($access_token_value) );
 
             if( $decode_access_token !== NULL ){
@@ -130,22 +133,20 @@
             }
         }
 
-        public function curl_request($url, $method, $postvals) {
+        public function curl_request($url, $method, $data_to_send) {
             $ch = curl_init($url);
+            
+            $options = array();
+            $options[CURLOPT_RETURNTRANSFER] = 1;
+
             if ($method == "POST") {
-                $options = array(
-                    CURLOPT_POST => 1,
-                    CURLOPT_POSTFIELDS => $postvals,
-                    CURLOPT_RETURNTRANSFER => 1,
-                );
-            } else {
-                $options = array(
-                    CURLOPT_RETURNTRANSFER => 1,
-                );
+                $options[CURLOPT_POST] = 1;
+                $options[CURLOPT_POSTFIELDS] = $data_to_send;
             }
+            
             curl_setopt_array($ch, $options);
-            if($this->header) {
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array( $this->header . $postvals));
+            if($this->header && $data_to_send) {
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array( $this->header . $data_to_send));
             }
 
             $response = curl_exec($ch);
