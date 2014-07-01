@@ -13,12 +13,12 @@
         protected $access_token;
         protected $request_url;
 
-        private $oauth_version;
-        private $dialog_url;
-        private $access_token_url;
-        private $response_type;
-        private $user_profile_url;
-        private $header;
+        protected $oauth_version;
+        protected $dialog_url;
+        protected $access_token_url;
+        protected $response_type;
+        protected $user_profile_url;
+        protected $header;
 
         public function __construct() {
             $this->accessToken = null;
@@ -74,17 +74,16 @@
         }
 
         public function Authorize() {
-    
             if($this->oauth_version == "2.0"){
-                $dialog_url = $this->dialogUrl 
+                $dialog_url = $this->dialog_url 
                     ."client_id=" . $this->client_id 
-                    ."&response_type=" . $this->responseType 
+                    ."&response_type=" . $this->response_type 
                     ."&scope=" . $this->scope
                     ."&state=" . $this->state
                     ."&redirect_uri=" . urlencode($this->redirect_uri);
             } else {
                 $date = new DateTime();
-                $request_url = $this->requestUrl;
+                $request_url = $this->request_url;
                 $postvals ="oauth_consumer_key=".$this->client_id
                     ."&oauth_signature_method=HMAC-SHA1"
                     ."&oauth_timestamp=".$date->getTimestamp()
@@ -97,7 +96,7 @@
                 
                 $oauth_redirect_value = $this->curl_request($redirect_url, 'GET', '');
 
-                $dialog_url = $this->dialogUrl . $oauth_redirect_value;             
+                $dialog_url = $this->dialog_url . $oauth_redirect_value;             
             }
             // @todo: find a better way to redirect
             echo("<script> top.location.href='" . $dialog_url . "'</script>");
@@ -111,7 +110,7 @@
                 ."&redirect_uri=" . urlencode($this->redirect_uri)
                 ."&code=" . $this->code;
 
-            $access_token_value = $this->curl_request($this->accessTokenUrl, 'POST', $postvals);
+            $access_token_value = $this->curl_request($this->access_token_url, 'POST', $postvals);
             $decode_access_token = json_decode( stripslashes($access_token_value) );
 
             if( $decode_access_token !== NULL ){
@@ -124,9 +123,9 @@
         public function getUserProfile() {
             $access_token_value = $this->requestAccessToken();
 
-            if ($this->userProfileUrl){
-                $profile_url = $this->userProfileUrl."".$atoken;
-                return $this->curl_request($profile_url,"GET",$access_token_value);
+            if ($this->user_profile_url){
+                $profile_url = "$this->user_profile_url$access_token_value";
+                return $this->curl_request($profile_url, "GET", $access_token_value);
             } else {
                 return null;
             }
