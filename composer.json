@@ -1,0 +1,23 @@
+{
+    "name": "svabael/social-oauth",
+    "description": "Oauth consumer for multiple social networks",
+    "homepage": "https://github.com/stavros-zavrakas/social-oauth",
+    "license": "MIT",
+    "keywords": ["http", "oauth", "social", "consumer", "facebook", "google", "linkedIn", "api", "requests"],
+    "require": {
+        "php": ">=5.3.0",
+        "nategood/httpful": "*"
+    },
+    "authors": [
+        {
+            "name": "Stavros Zavrakas",
+            "email": "stavros@zavrakas.me",
+            "homepage": "http://stavros.zavrakas.gr"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+                "classmap": ["src"]
+        }
+    }
+}
