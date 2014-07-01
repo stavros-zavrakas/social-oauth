@@ -75,24 +75,30 @@
 
         public function Authorize() {
             if($this->oauth_version == "2.0"){
-                $dialog_url = $this->dialog_url 
-                    ."client_id=$this->client_id" 
-                    ."&response_type=$this->response_type" 
-                    ."&scope=$this->scope"
-                    ."&state=$this->state"
-                    ."&redirect_uri=" . urlencode($this->redirect_uri);
-            } else {
-                $date = new DateTime();
-                $request_url = $this->request_url;
-                $postvals ="oauth_consumer_key=$this->client_id"
-                    ."&oauth_signature_method=HMAC-SHA1"
-                    ."&oauth_timestamp=".$date->getTimestamp()
-                    ."&oauth_nonce=$this->nonce"
-                    ."&oauth_callback=$this->redirect_uri"
-                    ."&oauth_signature=$this->client_secret"
-                    ."&oauth_version=1.0";
+                $query_data = array(
+                    'client_id' => $this->client_id,
+                    'response_type' => $this->response_type,
+                    'scope' => $this->scope,
+                    'state' => $this->state,
+                    'redirect_uri' => $this->redirect_uri
+                );
 
-                $redirect_url = "$request_url$postvals";
+                $dialog_url = $this->dialog_url . http_build_query($query_data);
+            } else {
+                $timestamp = time ();
+                $request_url = $this->request_url;
+                
+                $query_data = array(
+                    'oauth_consumer_key' => $this->client_id,
+                    'oauth_signature_method' => "HMAC-SHA1",
+                    'oauth_timestamp' => $timestamp,
+                    'oauth_nonce' => $this->nonce,
+                    'oauth_callback' => $this->redirect_uri,
+                    'oauth_signature' => $this->client_secret,
+                    'oauth_version' => "1.0"
+                );
+
+                $redirect_url = $request_url . http_build_query($query_data);
                 
                 $oauth_redirect_value = $this->curl_request($redirect_url, 'GET', null);
 
