@@ -1,5 +1,5 @@
 <?php
-	require("../src/SocialGoogleOauth.class.php");
+	require(__DIR__ . "/../src/SocialGoogleOauth.class.php");
 
     $oauth_consumer = new \SocialOauth\SocialGoogleOauth();
     $oauth_consumer->setClientId("GoogleId");

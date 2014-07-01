@@ -1,10 +1,10 @@
 <?php
-	require(__DIR__ . "/../src/SocialFacebookOauth.class.php");
+	require(__DIR__ . "/../src/SocialLinkedInOauth.class.php");
 
-    $oauth_consumer = new \SocialOauth\SocialFacebookOauth();
-    $oauth_consumer->setClientId("FacebookId");
-    $oauth_consumer->setClientSecret("FacebookSecret");
-    $oauth_consumer->setScope("email, user_birthday, user_about_me, user_likes");
+    $oauth_consumer = new \SocialOauth\SocialLinkedInOauth();
+    $oauth_consumer->setClientId("LinkedInId");
+    $oauth_consumer->setClientSecret("LinkedInSecret");
+    $oauth_consumer->setScope("r_fullprofile r_emailaddress");
     $oauth_consumer->setRedirectUri("http://www.example.com");
     $oauth_consumer->setState("state");
     $oauth_consumer->setCode("code");
