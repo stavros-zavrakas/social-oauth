@@ -2,7 +2,6 @@
     namespace SocialOauth;
 
     class SocialOauth {
-        public $social_oauth_version = '1.0';
         protected $client_id;
         protected $client_secret;
         protected $scope;
@@ -81,7 +80,7 @@
         }
 
         public function authorize() {
-            if($this->oauth_version == "2.0"){
+            if($this->oauth_version == "2.0") {
                 $query_data = array(
                     'client_id' => $this->client_id,
                     'response_type' => $this->response_type,
@@ -92,7 +91,7 @@
 
                 $dialog_url = $this->dialog_url . http_build_query($query_data);
             } else {
-                $timestamp = time ();
+                $timestamp = time();
                 $request_url = $this->request_url;
                 
                 $query_data = array(
@@ -112,10 +111,10 @@
                 $dialog_url = $this->dialog_url . $oauth_redirect_value;             
             }
             header("Location: $dialog_url");
-            die;
+            exit;
         }
 
-        public function requestAccessToken(){
+        public function requestAccessToken() {
             $query_data = array(
                 'client_id' => $this->client_id,
                 'client_secret' => $this->client_secret,
@@ -128,7 +127,7 @@
             $access_token_value = $this->curl_request($this->access_token_url, 'POST', $post_values);
             $decode_access_token = json_decode( stripslashes($access_token_value) );
 
-            if( $decode_access_token !== NULL ){
+            if($decode_access_token !== null) {
                 $access_token_value = $decode_access_token->access_token;
             }   
 
@@ -136,7 +135,7 @@
         }
 
         public function getUserProfile() {
-            if ($this->user_profile_url && $this->access_token){
+            if ($this->user_profile_url && $this->access_token) {
                 $profile_url = "$this->user_profile_url" . $this->access_token;
                 return $this->curl_request($profile_url, "GET", $this->access_token);
             } else {
@@ -144,7 +143,7 @@
             }
         }
 
-        public function curl_request($url, $method, $data_to_send) {
+        public function curl_request($url, $method, $data_to_send = null) {
             $ch = curl_init($url);
             
             $options = array();
