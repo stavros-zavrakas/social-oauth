@@ -80,7 +80,7 @@
             return $this->access_token = $access_token;
         }
 
-        public function Authorize() {
+        public function authorize() {
             if($this->oauth_version == "2.0"){
                 $query_data = array(
                     'client_id' => $this->client_id,
