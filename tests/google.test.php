@@ -1,10 +1,10 @@
 <?php
-	require("../src/SocialFacebookOauth.class.php");
+	require("../src/SocialGoogleOauth.class.php");
 
-    $oauth_consumer = new \SocialOauth\SocialFacebookOauth();
-    $oauth_consumer->setClientId("FacebookId");
-    $oauth_consumer->setClientSecret("FacebookSecret");
-    $oauth_consumer->setScope("email, user_birthday, user_about_me, user_likes");
+    $oauth_consumer = new \SocialOauth\SocialGoogleOauth();
+    $oauth_consumer->setClientId("GoogleId");
+    $oauth_consumer->setClientSecret("GoogleSecret");
+    $oauth_consumer->setScope("https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile");
     $oauth_consumer->setRedirectUri("http://www.example.com");
     $oauth_consumer->setState("state");
     $oauth_consumer->setCode("code");

@@ -1,7 +1,7 @@
 <?php
     namespace SocialOauth;
 
-    require(__DIR__ . "/SocialOauth.class.php");
+    require_once "SocialOauth.class.php";
 
     class SocialFacebookOauth extends SocialOauth {
 
@@ -13,5 +13,4 @@
             $this->user_profile_url = "https://graph.connect.facebook.com/me/?";
             $this->header = "";
         }
-
     }
