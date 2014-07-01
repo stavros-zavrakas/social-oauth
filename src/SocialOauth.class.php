@@ -76,30 +76,31 @@
         public function authorize() {
             if($this->oauth_version == "2.0"){
                 $dialog_url = $this->dialog_url 
-                    ."client_id=$this->client_id" 
-                    ."&response_type=$this->response_type" 
-                    ."&scope=$this->scope"
-                    ."&state=$this->state"
+                    ."client_id=" . $this->client_id 
+                    ."&response_type=" . $this->response_type 
+                    ."&scope=" . $this->scope
+                    ."&state=" . $this->state
                     ."&redirect_uri=" . urlencode($this->redirect_uri);
             } else {
                 $date = new DateTime();
                 $request_url = $this->request_url;
-                $postvals ="oauth_consumer_key=$this->client_id"
+                $postvals ="oauth_consumer_key=".$this->client_id
                     ."&oauth_signature_method=HMAC-SHA1"
                     ."&oauth_timestamp=".$date->getTimestamp()
-                    ."&oauth_nonce=$this->nonce"
-                    ."&oauth_callback=$this->redirect_uri"
-                    ."&oauth_signature=$this->client_secret"
+                    ."&oauth_nonce=".$this->nonce
+                    ."&oauth_callback=".$this->redirect_uri
+                    ."&oauth_signature=".$this->client_secret
                     ."&oauth_version=1.0";
 
-                $redirect_url = "$request_url$postvals";
+                $redirect_url = $request_url . "" . $postvals;
                 
                 $oauth_redirect_value = $this->curl_request($redirect_url, 'GET', null);
 
                 $dialog_url = $this->dialog_url . $oauth_redirect_value;             
             }
-            header("Location: $dialog_url");
-            die;
+            // @todo: find a better way to redirect
+            echo("<script> top.location.href='" . $dialog_url . "'</script>");
+
         }
 
         public function requestAccessToken(){
