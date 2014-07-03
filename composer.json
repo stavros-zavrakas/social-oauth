@@ -18,6 +18,11 @@
         }
     ],
     "autoload": {
-        "psr-0" : { "SocialOauth": ["src/"] }
+        "classmap": [
+            "src/"
+        ],
+        "psr-0": {
+            "SocialOauth\\SocialOauth": "src/"
+        }
     }
 }
