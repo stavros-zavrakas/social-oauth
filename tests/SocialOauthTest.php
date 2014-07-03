@@ -7,7 +7,6 @@
         
         public function setUp() {
             $this->social_oauth_consumer = new SocialOauth\SocialOauth;
-            $this->social_oauth_consumer_facebook = new SocialOauth\SocialFacebookOauth;
         }
 
         public function tearDown() {
@@ -33,22 +32,5 @@
             $this->assertInstanceOf('SocialOauth\SocialOauth', $this->social_oauth_consumer);
         }
 
-        public function testInvalidSettersArguments() {
-            $testing_class = $this->social_oauth_consumer;
-            $this->assertThrowsException('InvalidArgumentException', function () use($testing_class) {
-                $testing_class->setClientId();
-            });
 
-            $this->assertThrowsException('InvalidArgumentException', function () use($testing_class) {
-                $testing_class->setClientSecret();
-            });
-
-            $this->assertThrowsException('InvalidArgumentException', function () use($testing_class) {
-                $testing_class->setCode();
-            });
-
-            $this->assertThrowsException('InvalidArgumentException', function () use($testing_class) {
-                $testing_class->setAccessToken();
-            });
-        }
     }
