@@ -1,1 +1,5 @@
-Oauth consumer for multiple social networks
+Oauth consumer for multiple social networks. Right now supports:
+Facebook
+Google
+Linked In
+Evenbrite
