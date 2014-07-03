@@ -1,6 +1,8 @@
 <?php
     namespace SocialOauth;
 
+    use InvalidArgumentException;
+
     class SocialOauth {
         protected $client_id;
         protected $client_secret;

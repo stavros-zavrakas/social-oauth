@@ -5,8 +5,10 @@
     "license": "MIT",
     "keywords": ["http", "oauth", "social", "consumer", "facebook", "google", "linkedIn", "api", "requests"],
     "require": {
-        "php": ">=5.3.0",
-        "nategood/httpful": "*"
+        "php": ">=5.3.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.3"
     },
     "authors": [
         {
@@ -16,6 +18,6 @@
         }
     ],
     "autoload": {
-        "classmap": ["src"]
+        "psr-0" : { "SocialOauth": ["src/"] }
     }
 }
