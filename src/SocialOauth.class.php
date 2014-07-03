@@ -129,7 +129,7 @@
 
             if($decode_access_token !== null) {
                 $access_token_value = $decode_access_token->access_token;
-            }   
+            } 
 
             return $access_token_value;
         }
