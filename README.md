@@ -1,7 +1,8 @@
-### Status
-[![Build Status](https://travis-ci.org/stavros-zavrakas/social-oauth.svg?branch=master)](https://travis-ci.org/stavros-zavrakas/social-oauth)
+<p align="right">
+    [![Build Status](https://travis-ci.org/stavros-zavrakas/social-oauth.svg?branch=master)](https://travis-ci.org/stavros-zavrakas/social-oauth)
+</p>
 
-Oauth consumer for multiple social networks. Right now supports:
+# Oauth consumer for multiple social networks. Right now supports:
 - Facebook
 - Google
 - Linked In
