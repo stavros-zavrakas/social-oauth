@@ -29,7 +29,10 @@
             return $this->client_id;
         }
 
-        public function setClientId($client_id) {
+        public function setClientId($client_id = null) {
+            if(!isset($client_id))
+                throw new InvalidArgumentException("Social ClientId is mandatory");
+
             return $this->client_id = $client_id;
         }
 
@@ -37,7 +40,10 @@
             return $this->client_secret;
         }
 
-        public function setClientSecret($client_secret) {
+        public function setClientSecret($client_secret = null) {
+            if(!isset($client_secret))
+                throw new InvalidArgumentException("Social ClientSecret is mandatory");
+
             return $this->client_secret = $client_secret;
         }
 
@@ -45,7 +51,7 @@
             return $this->scope;
         }
 
-        public function setScope($scope) {
+        public function setScope($scope = null) {
             return $this->scope = $scope;
         }
 
@@ -53,7 +59,7 @@
             return $this->redirect_uri;
         }
 
-        public function setRedirectUri($redirect_uri) {
+        public function setRedirectUri($redirect_uri = null) {
             return $this->redirect_uri = $redirect_uri;
         }
 
@@ -61,7 +67,7 @@
             return $this->state;
         }
 
-        public function setState($state) {
+        public function setState($state = null) {
             return $this->state = $state;
         }
 
@@ -69,7 +75,10 @@
             return $this->code;
         }
 
-        public function setCode($code) {
+        public function setCode($code = null) {
+            if(!isset($code))
+                throw new InvalidArgumentException("Social code is mandatory");
+
             return $this->code = $code;
         }
 
@@ -77,7 +86,11 @@
             return $this->access_token;
         }
 
-        public function setAccessToken($access_token) {
+        public function setAccessToken($access_token = null) {
+            echo "dad: " . $access_token;
+            if(!isset($access_token))
+                throw new InvalidArgumentException("Social AccessToken is mandatory");
+
             return $this->access_token = $access_token;
         }
 
