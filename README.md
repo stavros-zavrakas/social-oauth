@@ -1,12 +1,12 @@
 [![Build Status](https://travis-ci.org/stavros-zavrakas/social-oauth.svg?branch=master)](https://travis-ci.org/stavros-zavrakas/social-oauth)
 
-# Oauth consumer for multiple social networks. Right now supports:
+** Oauth consumer for multiple social networks. Right now supports: ** 
 - Facebook
 - Google
 - Linked In
 - Evenbrite
 
-## Facebook authentication example:
+** Facebook authentication example: ** 
 
 ```php
 <?php
@@ -35,7 +35,7 @@
     }
 ```
 
-## Google authentication example:
+** Google authentication example: ** 
 
 ```php
 <?php
@@ -64,4 +64,4 @@
     }
 ```
 
-### The same logic for the other social networks.
+** The same logic for the other social networks. ** 
