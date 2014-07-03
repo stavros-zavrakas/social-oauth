@@ -7,7 +7,7 @@
 - Linked In
 - Evenbrite
 
-** Facebook authentication example: ** 
+**Facebook authentication example:** 
 
 ```php
 <?php
@@ -36,7 +36,7 @@
     }
 ```
 
-** Google authentication example: ** 
+**Google authentication example:** 
 
 ```php
 <?php
@@ -65,4 +65,4 @@
     }
 ```
 
-** The same logic for the other social networks. ** 
+**The same logic for the other social networks.** 
