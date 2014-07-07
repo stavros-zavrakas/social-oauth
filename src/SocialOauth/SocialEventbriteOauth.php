@@ -1,7 +1,7 @@
 <?php
     namespace SocialOauth;
 
-    require_once "SocialOauth.class.php";
+    require_once "SocialOauth.php";
 
     class SocialEventbriteOauth extends SocialOauth {
 
