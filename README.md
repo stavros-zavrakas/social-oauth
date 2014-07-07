@@ -7,6 +7,8 @@
 - Linked In
 - Evenbrite
 
+## [Integrate with Laravel 4](https://github.com/stavros-zavrakas/social-oauth/wiki)
+
 **Facebook authentication example:** 
 
 ```php
